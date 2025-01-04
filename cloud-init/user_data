@@ -1,0 +1,18 @@
+#cloud-config
+hostname: "ourhost.me"
+manage_etc_hosts: false
+write_files:
+  - path: /etc/hosts
+    content: |
+      127.0.1.1 ourhost.me
+      127.0.0.1 localhost
+      <proxmox_server_public_ip> ourhost.me
+package_upgrade: true
+users:
+  - default
+  - name: ubuntu
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    ssh_authorized_keys:
+      - ssh-rsa AAAAB...
+ssh_pwauth: true ## This line enables ssh password authentication
+timezone: Europe/Paris
